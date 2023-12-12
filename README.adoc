@@ -1,0 +1,3 @@
+= Advent of code 2023
+
+It should be done in jsonnet (specifically https://github.com/CertainLach/jrsonnet.git diealect).
