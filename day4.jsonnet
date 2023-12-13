@@ -7,18 +7,19 @@ function(input = |||
 	Card 6: 31 18 13 56 72 | 74 77 10 23 35 67 36 11
 |||, part = '2')
 local
+	{length, filter, member, set, map, split, sum, foldl, floor, range, join, ...} = std,
 	ne = function(v) v != '',
 	c = [
-		std.length(std.filter(function(n) std.member(win, n), have))
-		for [win, have] in std.map(function(c) std.map(function(v) std.set(std.filter(ne, std.split(v, ' '))), std.split(std.split(c, ':')[1], '|')), std.filter(ne, std.split(input, '\n')))
+		length(filter(function(n) member(v[0], n), v[1]))
+		for v in map(function(c) map(function(v) set(filter(ne, split(v, ' '))), split(split(c, ':')[1], '|')), filter(ne, split(input, '\n')))
 	],
 	y(cb) = local v = cb(v); v,
-	call(f) = f(),
+	call(f) = f()
 ;
-if part == '1' then std.sum([
-	std.floor(std.foldl(function(acc, _) acc * 2, std.range(1, v), 0.5))
+if part == '1' then sum([
+	floor(foldl(function(acc, _) acc * 2, range(1, v), 0.5))
 	for v in c
-]) else std.sum(std.join([], std.map(call, y(function(out) [
-	function() [c[v]] + std.join([], std.map(call, out[v+1:v+c[v]+1]))
-	for v in std.range(0, std.length(c) - 1)
-])))) + std.length(c)
+]) else sum(join([], y(function(out) [
+	[c[v]] + join([], out[v+1:v+c[v]+1])
+	for v in range(0, length(c) - 1)
+]))) + length(c)
